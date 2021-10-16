@@ -1,51 +1,56 @@
 package com.example.dicodingsubmission2.adapter
 
-import android.content.Intent
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.dicodingsubmission2.activity.DetailUserActivity
-import com.example.dicodingsubmission2.activity.DetailUserActivity.Companion.EXTRA_DATA
-import com.example.dicodingsubmission2.data.User
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.databinding.ItemUserBinding
 
 
-class UserAdapter(private val listUser: ArrayList<User>) :
+class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+    private var onItemClickCallback: OnItemClickCallback? = null
 
-    inner class UserViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    inner class UserViewHolder(val binding: ItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: DetailUserResponse) {
+            binding.root.setOnClickListener {
+                onItemClickCallback?.onItemClicked(user)
+            }
+            binding.apply {
+                Glide.with(itemView)
+                    .load(user.avatar_url)
+                    .centerCrop()
+                    .into(ivItemPhoto)
+                tvItemUsername.text = user.login
+            }
+        }
+    }
+
+    fun setList(users: ArrayList<DetailUserResponse>) {
+        listUser.clear()
+        listUser.addAll(users)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return UserViewHolder(binding)
+        val view = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return UserViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        with(holder) {
-            with(listUser[position]) {
-                binding.apply {
-                    Glide.with(holder.itemView.context)
-                        .load(avatar)
-                        .apply(RequestOptions().override(350, 550))
-                        .into(ivItemPhoto)
-
-                    tvItemName.text = name
-                    tvItemUsername.text = username
-                    tvItemCompany.text = company
-                }
-
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailUserActivity::class.java)
-                    intent.putExtra(EXTRA_DATA, this)
-                    itemView.context.startActivity(intent)
-                }
-            }
-        }
-
+        holder.bind(listUser[position])
     }
 
     override fun getItemCount(): Int = listUser.size
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: DetailUserResponse)
+    }
 }

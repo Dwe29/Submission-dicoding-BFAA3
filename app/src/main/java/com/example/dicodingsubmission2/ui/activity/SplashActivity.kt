@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2.activity
+package com.example.dicodingsubmission2.ui.activity
 
 
 import android.annotation.SuppressLint

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Github App</string>
     <string name="name">Name</string>
-    <string name="company">Company: %s</string>
+    <string name="company">Company </string>
     <string name="username">Username: %s</string>
     <string name="repository">Repository: %s</string>
     <string name="companyDetail">Company: %s</string>

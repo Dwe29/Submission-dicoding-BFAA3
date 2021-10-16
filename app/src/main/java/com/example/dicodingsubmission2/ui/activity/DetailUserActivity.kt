@@ -1,29 +1,33 @@
-package com.example.dicodingsubmission2.activity
+package com.example.dicodingsubmission2.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.viewpager.widget.ViewPager
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.dicodingsubmission2.R
-import com.example.dicodingsubmission2.SectionPagerAdapter
-import com.example.dicodingsubmission2.data.User
+import com.example.dicodingsubmission2.adapter.SectionPagerAdapter
 import com.example.dicodingsubmission2.databinding.ActivityDetailUserBinding
+import com.example.dicodingsubmission2.viewmodels.DetailUserViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailUserBinding
 
     companion object {
-        const val EXTRA_DATA = "extra_data"
+        const val EXTRA_USERNAME = "extra_username"
+
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
             R.string.tab_text_2
         )
     }
+
+    private lateinit var binding: ActivityDetailUserBinding
+    private lateinit var viewModel: DetailUserViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +37,27 @@ class DetailUserActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.detail_user)
 
-        val dataUser = intent.getParcelableExtra<User>(EXTRA_DATA) as User
-
-        binding.apply {
-            Glide.with(this@DetailUserActivity)
-                .load(dataUser.avatar)
-                .into(ivProfile)
-
-            tvName.text = dataUser.name
-            tvUsername.text = getString(R.string.username, dataUser.username)
-            tvRepository.text = getString(R.string.repository, dataUser.repository)
-            tvFollowers.text = getString(R.string.followers, dataUser.follower)
-            tvFollowing.text = getString(R.string.following, dataUser.following)
-            tvCompany.text = getString(R.string.company, dataUser.company)
-            tvLocation.text = getString(R.string.location, dataUser.location)
-        }
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
+        viewModel.setUserDetail(username!!)
+        viewModel.user.observe(this, {
+            if (it != null) {
+                binding.apply {
+                    Glide.with(this@DetailUserActivity)
+                        .load(it.avatar_url)
+                        .centerCrop()
+                        .into(ivProfile)
+                    tvName.text = it.name
+                    tvUsername.text = getString(R.string.username, it.login)
+                    tvRepository.text = getString(R.string.repository, it.public_repos.toString())
+                    tvFollowers.text = getString(R.string.followers, it.followers.toString())
+                    tvFollowing.text = getString(R.string.following, it.following.toString())
+                    tvCompany.text = getString(R.string.companyDetail, it.company)
+                    tvLocation.text = getString(R.string.location, it.location)
+                }
+            }
+        })
 
         callTabLayout()
 

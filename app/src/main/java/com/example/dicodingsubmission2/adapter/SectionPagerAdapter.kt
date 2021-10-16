@@ -1,8 +1,10 @@
-package com.example.dicodingsubmission2
+package com.example.dicodingsubmission2.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.dicodingsubmission2.ui.fragment.FollowerFragment
+import com.example.dicodingsubmission2.ui.fragment.FollowingFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
     override fun createFragment(position: Int): Fragment {

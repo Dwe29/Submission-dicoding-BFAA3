@@ -1,0 +1,96 @@
+package com.example.dicodingsubmission2.ui.activity
+
+import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dicodingsubmission2.R
+import com.example.dicodingsubmission2.adapter.UserAdapter
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
+
+import com.example.dicodingsubmission2.databinding.ActivityMainBinding
+import com.example.dicodingsubmission2.viewmodels.MainViewModel
+
+class MainActivity : AppCompatActivity() {
+    private var list: ArrayList<DetailUserResponse> = arrayListOf()
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: UserAdapter
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        adapter = UserAdapter(list)
+        adapter.notifyDataSetChanged()
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: DetailUserResponse) {
+                Intent(this@MainActivity, DetailUserActivity::class.java).also {
+                    it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                    startActivity(it)
+                }
+            }
+
+        })
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        binding.apply {
+            rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvUser.setHasFixedSize(true)
+            rvUser.adapter = adapter
+        }
+
+        viewModel.getSearchUsers().observe(this, {
+            if (it != null) {
+                adapter.setList(it)
+                showloading(false)
+            }
+        })
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.option_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.queryHint = resources.getString(R.string.search)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                showloading(true)
+                viewModel.setSearchUsers(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                list.clear()
+                return false
+            }
+
+
+        })
+        return true
+    }
+
+
+    private fun showloading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+
+    }
+
+}
