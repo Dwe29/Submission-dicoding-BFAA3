@@ -18,11 +18,6 @@ class DetailUserActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_USERNAME = "extra_username"
 
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
     }
 
     private lateinit var binding: ActivityDetailUserBinding
@@ -38,6 +33,8 @@ class DetailUserActivity : AppCompatActivity() {
         title = getString(R.string.detail_user)
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_USERNAME, username)
         viewModel = ViewModelProvider(this,
             ViewModelProvider.NewInstanceFactory()).get(DetailUserViewModel::class.java)
         viewModel.setUserDetail(username!!)
@@ -58,26 +55,18 @@ class DetailUserActivity : AppCompatActivity() {
                 }
             }
         })
-
-        callTabLayout()
+        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager, bundle)
+        binding.apply {
+            viewPager.adapter = sectionPagerAdapter
+            tabs.setupWithViewPager(viewPager)
+        }
+        supportActionBar?.elevation = 0f
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
-    }
-
-    private fun callTabLayout() {
-        val sectionPagerAdapter = SectionPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
-        supportActionBar?.elevation = 0f
     }
 
 

@@ -9,15 +9,15 @@ import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.databinding.ItemUserBinding
 
 
-class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
-    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+    private val listUser = ArrayList<DetailUserResponse>()
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
-    inner class UserViewHolder(val binding: ItemUserBinding) :
+    inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: DetailUserResponse) {
             binding.root.setOnClickListener {

@@ -18,7 +18,6 @@ import com.example.dicodingsubmission2.databinding.ActivityMainBinding
 import com.example.dicodingsubmission2.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private var list: ArrayList<DetailUserResponse> = arrayListOf()
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: UserAdapter
     private lateinit var binding: ActivityMainBinding
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = UserAdapter(list)
+        adapter = UserAdapter()
         adapter.notifyDataSetChanged()
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
             override fun onItemClicked(data: DetailUserResponse) {
@@ -74,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                list.clear()
                 return false
             }
 
