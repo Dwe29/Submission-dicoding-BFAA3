@@ -1,7 +1,6 @@
 package com.example.dicodingsubmission2.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dicodingsubmission2.api.RetrofitClient
@@ -28,11 +27,7 @@ class DetailUserViewModel : ViewModel() {
                 override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
                     Log.d("Failure", t.message!!)
                 }
-
             })
     }
 
-    fun getUserDetail(): LiveData<DetailUserResponse> {
-        return user
-    }
 }

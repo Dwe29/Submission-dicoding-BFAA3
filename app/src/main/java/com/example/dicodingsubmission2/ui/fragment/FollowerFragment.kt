@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicodingsubmission2.adapter.UserAdapter
-import com.example.dicodingsubmission2.data.model.User
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.databinding.FragmentFollowBinding
 import com.example.dicodingsubmission2.ui.activity.DetailUserActivity
 import com.example.dicodingsubmission2.viewmodels.FollowersViewModel
 
 class FollowerFragment : Fragment() {
-    private val listUser: ArrayList<User> = arrayListOf()
+    private val listUser: ArrayList<DetailUserResponse> = arrayListOf()
     private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: FollowersViewModel

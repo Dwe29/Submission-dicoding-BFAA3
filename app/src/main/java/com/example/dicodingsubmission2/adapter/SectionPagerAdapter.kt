@@ -10,7 +10,8 @@ import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.ui.fragment.FollowerFragment
 import com.example.dicodingsubmission2.ui.fragment.FollowingFragment
 
-class SectionPagerAdapter(private val mCtx: Context, fm: FragmentManager ,data: Bundle): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionPagerAdapter(private val mCtx: Context, fm: FragmentManager, data: Bundle) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private var fragmentBundle: Bundle = data
 
     init {
@@ -36,7 +37,7 @@ class SectionPagerAdapter(private val mCtx: Context, fm: FragmentManager ,data: 
         return fragment as Fragment
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return mCtx.resources.getString(TAB_TITLES[position])
     }
 }

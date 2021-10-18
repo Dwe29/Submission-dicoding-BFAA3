@@ -12,12 +12,12 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.adapter.UserAdapter
-import com.example.dicodingsubmission2.data.model.User
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.databinding.ActivityMainBinding
 import com.example.dicodingsubmission2.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val listUser : ArrayList<User> = arrayListOf()
+    private val listUser: ArrayList<DetailUserResponse> = arrayListOf()
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: UserAdapter
     private lateinit var binding: ActivityMainBinding
@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = UserAdapter(listUser)
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: User) {
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: DetailUserResponse) {
                 Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
                     startActivity(it)
@@ -75,8 +75,6 @@ class MainActivity : AppCompatActivity() {
                 listUser.clear()
                 return false
             }
-
-
         })
         return true
     }
@@ -88,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
-
     }
 
 }

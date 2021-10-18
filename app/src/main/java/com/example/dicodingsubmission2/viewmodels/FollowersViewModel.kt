@@ -6,21 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dicodingsubmission2.api.RetrofitClient
-import com.example.dicodingsubmission2.data.model.User
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FollowersViewModel : ViewModel() {
-    val listFollowers = MutableLiveData<ArrayList<User>>()
+    val listFollowers = MutableLiveData<ArrayList<DetailUserResponse>>()
 
     fun setListFollowers(username: String) {
         RetrofitClient.apiInstance
             .getFollowers(username)
-            .enqueue(object : Callback<ArrayList<User>> {
+            .enqueue(object : Callback<ArrayList<DetailUserResponse>> {
                 override fun onResponse(
-                    call: Call<ArrayList<User>>,
-                    response: Response<ArrayList<User>>,
+                    call: Call<ArrayList<DetailUserResponse>>,
+                    response: Response<ArrayList<DetailUserResponse>>,
                 ) {
                     if (response.isSuccessful) {
                         listFollowers.postValue(response.body())
@@ -28,14 +28,14 @@ class FollowersViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<DetailUserResponse>>, t: Throwable) {
                     Log.d("Failure", t.message!!)
                 }
 
             })
     }
 
-    fun getListFollowers(): LiveData<ArrayList<User>> {
+    fun getListFollowers(): LiveData<ArrayList<DetailUserResponse>> {
         return listFollowers
     }
 }

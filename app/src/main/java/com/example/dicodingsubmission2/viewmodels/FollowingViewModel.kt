@@ -1,27 +1,26 @@
 package com.example.dicodingsubmission2.viewmodels
 
 import android.content.ContentValues.TAG
-
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dicodingsubmission2.api.RetrofitClient
-import com.example.dicodingsubmission2.data.model.User
+import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FollowingViewModel : ViewModel() {
-    val listFollowing = MutableLiveData<ArrayList<User>>()
+    val listFollowing = MutableLiveData<ArrayList<DetailUserResponse>>()
 
     fun setListFollowing(username: String) {
         RetrofitClient.apiInstance
             .getFollowing(username)
-            .enqueue(object : Callback<ArrayList<User>> {
+            .enqueue(object : Callback<ArrayList<DetailUserResponse>> {
                 override fun onResponse(
-                    call: Call<ArrayList<User>>,
-                    response: Response<ArrayList<User>>,
+                    call: Call<ArrayList<DetailUserResponse>>,
+                    response: Response<ArrayList<DetailUserResponse>>,
                 ) {
                     if (response.isSuccessful) {
                         listFollowing.postValue(response.body())
@@ -29,14 +28,14 @@ class FollowingViewModel : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<DetailUserResponse>>, t: Throwable) {
                     Log.d("Failure", t.message!!)
                 }
 
             })
     }
 
-    fun getListFollowing(): LiveData<ArrayList<User>> {
+    fun getListFollowing(): LiveData<ArrayList<DetailUserResponse>> {
         return listFollowing
     }
 }
