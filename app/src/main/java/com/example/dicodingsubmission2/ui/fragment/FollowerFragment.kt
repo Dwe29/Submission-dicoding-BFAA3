@@ -1,24 +1,21 @@
 package com.example.dicodingsubmission2.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.adapter.UserAdapter
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.data.model.User
-import com.example.dicodingsubmission2.databinding.FragmentFollowerBinding
+import com.example.dicodingsubmission2.databinding.FragmentFollowBinding
 import com.example.dicodingsubmission2.ui.activity.DetailUserActivity
 import com.example.dicodingsubmission2.viewmodels.FollowersViewModel
 
 class FollowerFragment : Fragment() {
     private val listUser: ArrayList<User> = arrayListOf()
-    private var _binding: FragmentFollowerBinding? = null
+    private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: FollowersViewModel
     private lateinit var adapter: UserAdapter
@@ -31,7 +28,7 @@ class FollowerFragment : Fragment() {
     ): View {
         val args = arguments
         username = args?.getString(DetailUserActivity.EXTRA_USERNAME).toString()
-        _binding = FragmentFollowerBinding.inflate(inflater, container, false)
+        _binding = FragmentFollowBinding.inflate(inflater, container, false)
 
         showRecycler()
         showLoading(true)
@@ -48,10 +45,11 @@ class FollowerFragment : Fragment() {
     }
 
     private fun showRecycler() {
-        adapter = UserAdapter()
+        adapter = UserAdapter(listUser)
+        adapter.notifyDataSetChanged()
         binding.apply {
             rvFollower.setHasFixedSize(true)
-            rvFollower.layoutManager = LinearLayoutManager(context)
+            rvFollower.layoutManager = LinearLayoutManager(requireContext())
             rvFollower.adapter = adapter
         }
     }
@@ -69,5 +67,4 @@ class FollowerFragment : Fragment() {
         }
 
     }
-
 }

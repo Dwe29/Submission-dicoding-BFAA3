@@ -3,11 +3,9 @@ package com.example.dicodingsubmission2.adapter
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.ui.fragment.FollowerFragment
 import com.example.dicodingsubmission2.ui.fragment.FollowingFragment

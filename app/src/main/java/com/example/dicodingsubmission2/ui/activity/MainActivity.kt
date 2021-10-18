@@ -3,18 +3,16 @@ package com.example.dicodingsubmission2.ui.activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.adapter.UserAdapter
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.data.model.User
-
 import com.example.dicodingsubmission2.databinding.ActivityMainBinding
 import com.example.dicodingsubmission2.viewmodels.MainViewModel
 
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = UserAdapter()
+        adapter = UserAdapter(listUser)
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
             override fun onItemClicked(data: User) {
                 Intent(this@MainActivity, DetailUserActivity::class.java).also {
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.getSearchUsers().observe(this, {
             if (it != null) {
                 adapter.setList(it)
-                showloading(false)
+                showLoading(false)
             }
         })
 
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                showloading(true)
+                showLoading(true)
                 viewModel.setSearchUsers(query)
                 return true
             }
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showloading(state: Boolean) {
+    private fun showLoading(state: Boolean) {
         if (state) {
             binding.progressBar.visibility = View.VISIBLE
         } else {

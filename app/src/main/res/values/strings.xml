@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Github App</string>
-    <string name="name">Name</string>
-    <string name="company">Company </string>
     <string name="username">Username: %s</string>
     <string name="repository">Repository: %s</string>
     <string name="companyDetail">Company: %s</string>
@@ -12,7 +10,6 @@
     <string name="detail_user">Detail User</string>
     <string name="search">Search</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
 

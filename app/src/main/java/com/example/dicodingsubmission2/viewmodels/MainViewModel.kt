@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dicodingsubmission2.api.RetrofitClient
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.data.model.User
 import com.example.dicodingsubmission2.data.model.UserResponse
 import retrofit2.Call

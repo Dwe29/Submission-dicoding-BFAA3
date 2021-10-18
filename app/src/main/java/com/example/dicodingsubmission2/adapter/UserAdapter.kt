@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
 import com.example.dicodingsubmission2.data.model.User
 import com.example.dicodingsubmission2.databinding.ItemUserBinding
 
 
-class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val listUser: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
-    private var listUser = arrayListOf<User>()
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback

@@ -1,17 +1,13 @@
 package com.example.dicodingsubmission2.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.dicodingsubmission2.R
 import com.example.dicodingsubmission2.adapter.SectionPagerAdapter
 import com.example.dicodingsubmission2.databinding.ActivityDetailUserBinding
 import com.example.dicodingsubmission2.viewmodels.DetailUserViewModel
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
 
