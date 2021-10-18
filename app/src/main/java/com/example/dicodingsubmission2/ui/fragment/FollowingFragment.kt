@@ -46,7 +46,6 @@ class FollowingFragment : Fragment() {
 
     private fun showRecycler() {
         adapter = UserAdapter(listUser)
-        adapter.notifyDataSetChanged()
         binding.apply {
             rvFollower.setHasFixedSize(true)
             rvFollower.layoutManager = LinearLayoutManager(requireContext())

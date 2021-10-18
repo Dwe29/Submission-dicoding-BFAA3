@@ -1,5 +1,6 @@
 package com.example.dicodingsubmission2.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,6 @@ class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
             }
             binding.apply {
                 tvItemUsername.text = user.login
-                tvItemName.text = user.name
                 Glide.with(itemView)
                     .load(user.avatar_url)
                     .centerCrop()
@@ -35,6 +35,7 @@ class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(users: ArrayList<DetailUserResponse>) {
         listUser.clear()
         listUser.addAll(users)
