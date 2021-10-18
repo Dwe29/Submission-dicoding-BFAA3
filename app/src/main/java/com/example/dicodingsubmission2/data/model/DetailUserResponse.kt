@@ -1,8 +1,5 @@
 package com.example.dicodingsubmission2.data.model
 
-import com.google.gson.annotations.SerializedName
-
-
 data class DetailUserResponse(
     val login: String,
     val id: Int,

@@ -29,11 +29,10 @@ class MainViewModel : ViewModel() {
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                     Log.d("Failure", t.message!!)
                 }
-
             })
     }
 
-    fun getSearchUsers(): LiveData<ArrayList<DetailUserResponse>>{
+    fun getSearchUsers(): LiveData<ArrayList<DetailUserResponse>> {
         return listUsers
     }
 }
