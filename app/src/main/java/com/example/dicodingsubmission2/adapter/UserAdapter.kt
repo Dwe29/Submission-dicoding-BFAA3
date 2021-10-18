@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicodingsubmission2.data.model.DetailUserResponse
+import com.example.dicodingsubmission2.data.model.User
 import com.example.dicodingsubmission2.databinding.ItemUserBinding
 
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-    private val listUser = ArrayList<DetailUserResponse>()
+class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
     private var onItemClickCallback: OnItemClickCallback? = null
+    private var listUser = arrayListOf<User>()
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -19,21 +21,22 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: DetailUserResponse) {
+        fun bind(user: User) {
             binding.root.setOnClickListener {
                 onItemClickCallback?.onItemClicked(user)
             }
             binding.apply {
+                tvItemUsername.text = user.login
                 Glide.with(itemView)
                     .load(user.avatar_url)
                     .centerCrop()
                     .into(ivItemPhoto)
-                tvItemUsername.text = user.login
+
             }
         }
     }
 
-    fun setList(users: ArrayList<DetailUserResponse>) {
+    fun setList(users: ArrayList<User>) {
         listUser.clear()
         listUser.addAll(users)
         notifyDataSetChanged()
@@ -46,11 +49,12 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listUser[position])
+
     }
 
     override fun getItemCount(): Int = listUser.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: DetailUserResponse)
+        fun onItemClicked(data: User)
     }
 }

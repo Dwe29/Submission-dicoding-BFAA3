@@ -15,6 +15,10 @@ import com.example.dicodingsubmission2.ui.fragment.FollowingFragment
 class SectionPagerAdapter(private val mCtx: Context, fm: FragmentManager ,data: Bundle): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private var fragmentBundle: Bundle = data
 
+    init {
+        fragmentBundle = data
+    }
+
     @StringRes
     private val TAB_TITLES = intArrayOf(
         R.string.tab_text_1,
