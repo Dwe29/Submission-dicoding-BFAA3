@@ -1,7 +1,7 @@
-package com.example.dicodingsubmission2.api
+package com.example.dicodingsubmission3.api
 
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
-import com.example.dicodingsubmission2.data.model.UserResponse
+import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

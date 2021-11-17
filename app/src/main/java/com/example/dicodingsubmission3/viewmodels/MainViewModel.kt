@@ -1,12 +1,12 @@
-package com.example.dicodingsubmission2.viewmodels
+package com.example.dicodingsubmission3.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dicodingsubmission2.api.RetrofitClient
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
-import com.example.dicodingsubmission2.data.model.UserResponse
+import com.example.dicodingsubmission3.api.RetrofitClient
+import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

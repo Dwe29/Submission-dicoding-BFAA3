@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2.api
+package com.example.dicodingsubmission3.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

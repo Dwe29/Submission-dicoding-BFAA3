@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2
+package com.example.dicodingsubmission3
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

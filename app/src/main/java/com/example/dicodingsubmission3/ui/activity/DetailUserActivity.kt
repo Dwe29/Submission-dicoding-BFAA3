@@ -1,13 +1,13 @@
-package com.example.dicodingsubmission2.ui.activity
+package com.example.dicodingsubmission3.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.dicodingsubmission2.R
-import com.example.dicodingsubmission2.adapter.SectionPagerAdapter
-import com.example.dicodingsubmission2.databinding.ActivityDetailUserBinding
-import com.example.dicodingsubmission2.viewmodels.DetailUserViewModel
+import com.example.dicodingsubmission3.R
+import com.example.dicodingsubmission3.adapter.SectionPagerAdapter
+import com.example.dicodingsubmission3.databinding.ActivityDetailUserBinding
+import com.example.dicodingsubmission3.viewmodels.DetailUserViewModel
 
 class DetailUserActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2.ui.activity
+package com.example.dicodingsubmission3.ui.activity
 
 import android.app.SearchManager
 import android.content.Context
@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dicodingsubmission2.R
-import com.example.dicodingsubmission2.adapter.UserAdapter
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
-import com.example.dicodingsubmission2.databinding.ActivityMainBinding
-import com.example.dicodingsubmission2.viewmodels.MainViewModel
+import com.example.dicodingsubmission3.R
+import com.example.dicodingsubmission3.adapter.UserAdapter
+import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.databinding.ActivityMainBinding
+import com.example.dicodingsubmission3.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private val listUser: ArrayList<DetailUserResponse> = arrayListOf()

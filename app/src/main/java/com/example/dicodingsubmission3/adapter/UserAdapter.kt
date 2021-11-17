@@ -1,12 +1,12 @@
-package com.example.dicodingsubmission2.adapter
+package com.example.dicodingsubmission3.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dicodingsubmission2.data.model.DetailUserResponse
-import com.example.dicodingsubmission2.databinding.ItemUserBinding
+import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.databinding.ItemUserBinding
 
 
 class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :

@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2.adapter
+package com.example.dicodingsubmission3.adapter
 
 import android.content.Context
 import android.os.Bundle
@@ -6,9 +6,9 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.dicodingsubmission2.R
-import com.example.dicodingsubmission2.ui.fragment.FollowerFragment
-import com.example.dicodingsubmission2.ui.fragment.FollowingFragment
+import com.example.dicodingsubmission3.R
+import com.example.dicodingsubmission3.ui.fragment.FollowerFragment
+import com.example.dicodingsubmission3.ui.fragment.FollowingFragment
 
 class SectionPagerAdapter(private val mCtx: Context, fm: FragmentManager, data: Bundle) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

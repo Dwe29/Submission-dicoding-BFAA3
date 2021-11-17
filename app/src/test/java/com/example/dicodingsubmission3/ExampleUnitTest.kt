@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2
+package com.example.dicodingsubmission3
 
 import org.junit.Test
 

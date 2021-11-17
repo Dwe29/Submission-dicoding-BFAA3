@@ -1,4 +1,4 @@
-package com.example.dicodingsubmission2.data.model
+package com.example.dicodingsubmission3.data.model
 
 data class DetailUserResponse(
     val login: String,

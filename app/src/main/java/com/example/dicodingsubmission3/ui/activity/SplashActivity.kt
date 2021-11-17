@@ -1,11 +1,11 @@
-package com.example.dicodingsubmission2.ui.activity
+package com.example.dicodingsubmission3.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.dicodingsubmission2.R
+import com.example.dicodingsubmission3.R
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
