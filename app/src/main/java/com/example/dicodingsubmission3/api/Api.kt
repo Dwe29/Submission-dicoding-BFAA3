@@ -1,6 +1,7 @@
 package com.example.dicodingsubmission3.api
 
 import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -25,11 +26,11 @@ interface Api {
     @Headers("Authorization: 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")
     fun getFollowers(
         @Path("username") username: String,
-    ): Call<ArrayList<DetailUserResponse>>
+    ): Call<ArrayList<User>>
 
     @GET("users/{username}/following")
     @Headers("Authorization: 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")
     fun getFollowing(
         @Path("username") username: String,
-    ): Call<ArrayList<DetailUserResponse>>
+    ): Call<ArrayList<User>>
 }

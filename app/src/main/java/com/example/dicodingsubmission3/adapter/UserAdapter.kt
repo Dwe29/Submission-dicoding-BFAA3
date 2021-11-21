@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.ItemUserBinding
 
 
-class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
+class UserAdapter(private val listUser: ArrayList<User>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
@@ -20,7 +21,7 @@ class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
 
     inner class UserViewHolder(private val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: DetailUserResponse) {
+        fun bind(user: User) {
             binding.root.setOnClickListener {
                 onItemClickCallback?.onItemClicked(user)
             }
@@ -36,7 +37,7 @@ class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(users: ArrayList<DetailUserResponse>) {
+    fun setList(users: ArrayList<User>) {
         listUser.clear()
         listUser.addAll(users)
         notifyDataSetChanged()
@@ -55,6 +56,6 @@ class UserAdapter(private val listUser: ArrayList<DetailUserResponse>) :
     override fun getItemCount(): Int = listUser.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: DetailUserResponse)
+        fun onItemClicked(data: User)
     }
 }

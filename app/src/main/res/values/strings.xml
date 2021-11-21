@@ -12,5 +12,8 @@
 
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="favorite">Favorite</string>
+
 
 </resources>

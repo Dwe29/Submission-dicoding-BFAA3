@@ -7,7 +7,17 @@
         android:icon="@drawable/ic_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="collapseActionView|always"/>
+        app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/favorite_menu"
+        android:icon="@drawable/ic_favorite_white"
+        android:title="@string/favorite"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/option"
+        android:title="@string/change_theme"
+        android:icon="@drawable/ic_more"
+        app:showAsAction="collapseActionView" />
 
 </menu>

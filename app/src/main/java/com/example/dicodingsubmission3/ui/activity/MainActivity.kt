@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -12,12 +13,12 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicodingsubmission3.R
 import com.example.dicodingsubmission3.adapter.UserAdapter
-import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.ActivityMainBinding
 import com.example.dicodingsubmission3.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val listUser: ArrayList<DetailUserResponse> = arrayListOf()
+    private val listUser: ArrayList<User> = arrayListOf()
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: UserAdapter
     private lateinit var binding: ActivityMainBinding
@@ -29,9 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserAdapter(listUser)
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: DetailUserResponse) {
+            override fun onItemClicked(data: User) {
                 Intent(this@MainActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+                    it.putExtra(DetailUserActivity.EXTRA_ID, data.id)
+                    it.putExtra(DetailUserActivity.EXTRA_AVATAR, data.avatar_url)
                     startActivity(it)
                 }
             }
@@ -76,9 +79,19 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.favorite_menu -> {
+                Intent(this, FavoriteActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun showLoading(state: Boolean) {
         if (state) {

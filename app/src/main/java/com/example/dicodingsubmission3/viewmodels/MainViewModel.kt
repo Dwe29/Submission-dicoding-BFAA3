@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dicodingsubmission3.api.RetrofitClient
 import com.example.dicodingsubmission3.data.model.DetailUserResponse
+import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel : ViewModel() {
-    val listUsers = MutableLiveData<ArrayList<DetailUserResponse>>()
+    val listUsers = MutableLiveData<ArrayList<User>>()
     fun setSearchUsers(query: String) {
         RetrofitClient.apiInstance
             .getSearchUser(query)
@@ -32,7 +33,7 @@ class MainViewModel : ViewModel() {
             })
     }
 
-    fun getSearchUsers(): LiveData<ArrayList<DetailUserResponse>> {
+    fun getSearchUsers(): LiveData<ArrayList<User>> {
         return listUsers
     }
 }
