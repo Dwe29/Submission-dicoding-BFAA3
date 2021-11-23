@@ -15,6 +15,7 @@ import com.example.dicodingsubmission3.R
 import com.example.dicodingsubmission3.adapter.UserAdapter
 import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.ActivityMainBinding
+import com.example.dicodingsubmission3.helper.ViewModelFactory
 import com.example.dicodingsubmission3.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -40,8 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        viewModel = obtainViewModel(this as AppCompatActivity)
         binding.apply {
             rvUser.layoutManager = LinearLayoutManager(this@MainActivity)
             rvUser.setHasFixedSize(true)
@@ -49,13 +49,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.getSearchUsers().observe(this, {
-            if (it != null) {
-                adapter.setList(it)
-                showLoading(false)
-            }
+            adapter.setList(it)
+            showLoading(false)
         })
+    }
 
-
+    private fun obtainViewModel(activity: AppCompatActivity): MainViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[MainViewModel::class.java]
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -83,9 +84,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.favorite_menu -> {
                 Intent(this, FavoriteActivity::class.java).also {
+                    startActivity(it)
+                }
+            }
+
+            R.id.option -> {
+                Intent(this, ThemeActivity::class.java).also {
                     startActivity(it)
                 }
             }

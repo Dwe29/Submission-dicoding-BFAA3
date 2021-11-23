@@ -14,6 +14,7 @@
         android:icon="@drawable/ic_favorite_white"
         android:title="@string/favorite"
         app:showAsAction="always"/>
+
     <item
         android:id="@+id/option"
         android:title="@string/change_theme"

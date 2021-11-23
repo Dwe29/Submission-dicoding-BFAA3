@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicodingsubmission3.adapter.UserAdapter
-import com.example.dicodingsubmission3.data.model.DetailUserResponse
 import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.FragmentFollowBinding
+import com.example.dicodingsubmission3.helper.ViewModelFactory
 import com.example.dicodingsubmission3.ui.activity.DetailUserActivity
 import com.example.dicodingsubmission3.viewmodels.FollowingViewModel
 
@@ -33,8 +34,7 @@ class FollowingFragment : Fragment() {
 
         showRecycler()
         showLoading(true)
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.NewInstanceFactory()).get(FollowingViewModel::class.java)
+        viewModel = obtainViewModel(context as AppCompatActivity)
         viewModel.setListFollowing(username)
         viewModel.getListFollowing().observe(viewLifecycleOwner, {
             if (it != null) {
@@ -43,6 +43,11 @@ class FollowingFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): FollowingViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[FollowingViewModel::class.java]
     }
 
     private fun showRecycler() {

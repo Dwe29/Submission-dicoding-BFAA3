@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.dicodingsubmission3.R
 import com.example.dicodingsubmission3.adapter.SectionPagerAdapter
 import com.example.dicodingsubmission3.databinding.ActivityDetailUserBinding
+import com.example.dicodingsubmission3.helper.ViewModelFactory
 import com.example.dicodingsubmission3.viewmodels.DetailUserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +40,7 @@ class DetailUserActivity : AppCompatActivity() {
 
         val bundle = Bundle()
         bundle.putString(EXTRA_USERNAME, username)
-        viewModel = ViewModelProvider(this).get(DetailUserViewModel::class.java)
+        viewModel = obtainViewModel(this as AppCompatActivity)
         viewModel.setUserDetail(username!!)
         viewModel.user.observe(this, {
             if (it != null) {
@@ -91,6 +92,11 @@ class DetailUserActivity : AppCompatActivity() {
         }
         supportActionBar?.elevation = 0f
 
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): DetailUserViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[DetailUserViewModel::class.java]
     }
 
     override fun onSupportNavigateUp(): Boolean {

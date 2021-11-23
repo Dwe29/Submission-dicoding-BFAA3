@@ -9,6 +9,7 @@ import com.example.dicodingsubmission3.adapter.UserAdapter
 import com.example.dicodingsubmission3.data.local.FavoriteUser
 import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.ActivityFavoriteBinding
+import com.example.dicodingsubmission3.helper.ViewModelFactory
 import com.example.dicodingsubmission3.viewmodels.FavoriteViewModel
 
 class FavoriteActivity : AppCompatActivity() {
@@ -26,7 +27,7 @@ class FavoriteActivity : AppCompatActivity() {
         adapter = UserAdapter(listUser)
         adapter.notifyDataSetChanged()
 
-        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        viewModel = obtainViewModel(this as AppCompatActivity)
 
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
             override fun onItemClicked(data: User) {
@@ -53,6 +54,11 @@ class FavoriteActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
     private fun mapList(users: List<FavoriteUser>): ArrayList<User> {
