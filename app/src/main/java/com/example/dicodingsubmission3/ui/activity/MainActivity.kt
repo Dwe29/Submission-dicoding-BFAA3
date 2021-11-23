@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +52,14 @@ class MainActivity : AppCompatActivity() {
         viewModel.getSearchUsers().observe(this, {
             adapter.setList(it)
             showLoading(false)
+        })
+        isDarkMode()
+    }
+
+    private fun isDarkMode() {
+        viewModel.getThemeSettings().observe(this, {
+            if (it) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         })
     }
 
