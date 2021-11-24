@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Github App</string>
-    <string name="name">Name</string>
-    <string name="company">Company</string>
-    <string name="username">Username: </string>
-    <string name="repository">Repository:</string>
-    <string name="companyDetail">Company:</string>
-    <string name="location">Location:</string>
-</resources>

@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(it)
                 }
             }
-
         })
         viewModel = obtainViewModel(this as AppCompatActivity)
         binding.apply {
@@ -73,19 +72,24 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.option_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        val searchView = menu.findItem(R.id.view_search).actionView as SearchView
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 showLoading(true)
+                binding.searchIcon.visibility = View.GONE
+                binding.textSearchIcon.visibility = View.GONE
                 viewModel.setSearchUsers(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 listUser.clear()
+                adapter.notifyDataSetChanged()
+                binding.searchIcon.visibility = View.VISIBLE
+                binding.textSearchIcon.visibility = View.VISIBLE
                 return false
             }
         })

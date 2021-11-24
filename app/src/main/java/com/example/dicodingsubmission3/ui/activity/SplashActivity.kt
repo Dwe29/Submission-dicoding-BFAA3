@@ -8,16 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.example.dicodingsubmission3.R
+import com.example.dicodingsubmission3.databinding.ActivitySplashBinding
 import com.example.dicodingsubmission3.helper.ViewModelFactory
 import com.example.dicodingsubmission3.viewmodels.MainViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+    private lateinit var binding:ActivitySplashBinding
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = obtainViewModel(this as AppCompatActivity)
 
         Handler(mainLooper).postDelayed({
@@ -29,9 +32,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun isDarkMode() {
-        viewModel.getThemeSettings().observe(this, {
-            if (it) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        viewModel.getThemeSettings().observe(this, { darkMode ->
+            if (darkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.ivSplash.setImageResource(R.drawable.github_icon_light)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.ivSplash.setImageResource(R.drawable.github_icon_dark)
+            }
         })
     }
 

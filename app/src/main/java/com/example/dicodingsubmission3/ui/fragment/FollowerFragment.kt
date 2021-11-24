@@ -32,7 +32,7 @@ class FollowerFragment : Fragment() {
         username = args?.getString(DetailUserActivity.EXTRA_USERNAME).toString()
         _binding = FragmentFollowBinding.inflate(inflater, container, false)
 
-        showRecycler()
+        showRecycler(listUser)
         showLoading(true)
         viewModel = obtainViewModel(context as AppCompatActivity)
         viewModel.setListFollowers(username)
@@ -50,13 +50,14 @@ class FollowerFragment : Fragment() {
         return ViewModelProvider(activity, factory)[FollowersViewModel::class.java]
     }
 
-    private fun showRecycler() {
-        adapter = UserAdapter(listUser)
+    private fun showRecycler(list: ArrayList<User>) {
+        adapter = UserAdapter(list)
         binding.apply {
             rvFollower.setHasFixedSize(true)
             rvFollower.layoutManager = LinearLayoutManager(requireContext())
             rvFollower.adapter = adapter
         }
+//        if (list.isNotEmpty())
     }
 
     override fun onDestroyView() {

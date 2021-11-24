@@ -23,13 +23,14 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = "Favorite"
 
         adapter = UserAdapter(listUser)
         adapter.notifyDataSetChanged()
 
         viewModel = obtainViewModel(this as AppCompatActivity)
 
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
                 Intent(this@FavoriteActivity, DetailUserActivity::class.java).also {
                     it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
@@ -38,7 +39,6 @@ class FavoriteActivity : AppCompatActivity() {
                     startActivity(it)
                 }
             }
-
         })
 
         binding.apply {
@@ -53,7 +53,13 @@ class FavoriteActivity : AppCompatActivity() {
                 adapter.setList(list)
             }
         })
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
