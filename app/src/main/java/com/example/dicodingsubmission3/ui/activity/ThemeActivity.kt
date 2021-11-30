@@ -29,7 +29,6 @@ class ThemeActivity : AppCompatActivity() {
     }
 
     private fun darkMode() {
-
         binding.switchTheme.apply {
             viewModel.getThemeSettings().observe(this@ThemeActivity, {
                 if (it) {

@@ -39,6 +39,7 @@ class FollowerFragment : Fragment() {
         viewModel.getListFollowers().observe(viewLifecycleOwner, {
             if (it != null) {
                 adapter.setList(it)
+                showIcon(it)
                 showLoading(false)
             }
         })
@@ -57,7 +58,6 @@ class FollowerFragment : Fragment() {
             rvFollower.layoutManager = LinearLayoutManager(requireContext())
             rvFollower.adapter = adapter
         }
-//        if (list.isNotEmpty())
     }
 
     override fun onDestroyView() {
@@ -71,6 +71,15 @@ class FollowerFragment : Fragment() {
         } else {
             binding.progressBarFollower.visibility = View.GONE
         }
+    }
 
+    private fun showIcon(list: ArrayList<User>) {
+        if (list.isEmpty()) {
+            binding.removeIcon.visibility = View.VISIBLE
+            binding.textRemoveIcon.visibility = View.VISIBLE
+        } else {
+            binding.removeIcon.visibility = View.GONE
+            binding.textRemoveIcon.visibility = View.GONE
+        }
     }
 }

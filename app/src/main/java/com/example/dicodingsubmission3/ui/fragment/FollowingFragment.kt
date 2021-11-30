@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dicodingsubmission3.R
 import com.example.dicodingsubmission3.adapter.UserAdapter
 import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.FragmentFollowBinding
@@ -39,6 +40,7 @@ class FollowingFragment : Fragment() {
         viewModel.getListFollowing().observe(viewLifecycleOwner, {
             if (it != null) {
                 adapter.setList(it)
+                showIcon(it)
                 showLoading(false)
             }
         })
@@ -70,6 +72,16 @@ class FollowingFragment : Fragment() {
         } else {
             binding.progressBarFollower.visibility = View.GONE
         }
+    }
 
+    private fun showIcon(list: ArrayList<User>) {
+        if (list.isNullOrEmpty()) {
+            binding.removeIcon.visibility = View.VISIBLE
+            binding.textRemoveIcon.text = getString(R.string.following_tidak_ada)
+            binding.textRemoveIcon.visibility = View.VISIBLE
+        } else {
+            binding.removeIcon.visibility = View.GONE
+            binding.textRemoveIcon.visibility = View.GONE
+        }
     }
 }

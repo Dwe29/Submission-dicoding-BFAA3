@@ -9,7 +9,7 @@ import com.example.dicodingsubmission3.data.local.FavoriteUserDao
 import com.example.dicodingsubmission3.data.local.UserDatabase
 import com.example.dicodingsubmission3.data.model.DetailUserResponse
 
-class FavoriteViewModel(application: Application): AndroidViewModel(application) {
+class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
     val user = MutableLiveData<DetailUserResponse>()
 
     private var userDao: FavoriteUserDao?

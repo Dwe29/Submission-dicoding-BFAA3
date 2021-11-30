@@ -1,6 +1,5 @@
 package com.example.dicodingsubmission3.viewmodels
 
-import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FollowingViewModel(application: Application) : ViewModel() {
+class FollowingViewModel : ViewModel() {
     val listFollowing = MutableLiveData<ArrayList<User>>()
 
     fun setListFollowing(username: String) {

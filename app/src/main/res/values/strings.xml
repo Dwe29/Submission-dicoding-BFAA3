@@ -14,10 +14,11 @@
     <string name="tab_text_2">Following</string>
     <string name="change_theme">Change Theme</string>
     <string name="favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="theme">Dark Theme</string>
     <string name="yuk_cari_user_github">Yuk Cari User GitHub</string>
-
+    <string name="followers_not_exists">Followers not exists</string>
+    <string name="followers_tidak_ada">Not followers yet</string>
+    <string name="following_tidak_ada">Not following yet</string>
 
 </resources>

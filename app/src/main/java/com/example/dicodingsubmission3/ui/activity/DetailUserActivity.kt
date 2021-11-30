@@ -1,6 +1,7 @@
 package com.example.dicodingsubmission3.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -25,7 +26,6 @@ class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
     private lateinit var viewModel: DetailUserViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
@@ -40,10 +40,12 @@ class DetailUserActivity : AppCompatActivity() {
 
         val bundle = Bundle()
         bundle.putString(EXTRA_USERNAME, username)
+        showLoading(true)
         viewModel = obtainViewModel(this as AppCompatActivity)
         viewModel.setUserDetail(username!!)
         viewModel.user.observe(this, {
             if (it != null) {
+                showLoading(false)
                 binding.apply {
                     Glide.with(this@DetailUserActivity)
                         .load(it.avatar_url)
@@ -63,7 +65,7 @@ class DetailUserActivity : AppCompatActivity() {
         var _isChecked = false
         CoroutineScope(Dispatchers.IO).launch {
             val count = viewModel.checkUser(id)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 if (count != null) {
                     if (count > 0) {
                         binding.toggleFavorite.isChecked = true
@@ -76,7 +78,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
-        binding.toggleFavorite.setOnClickListener{
+        binding.toggleFavorite.setOnClickListener {
             _isChecked = !_isChecked
             if (_isChecked) {
                 viewModel.addToFavorite(username, id, avatarUrl!!)
@@ -104,5 +106,41 @@ class DetailUserActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBarDetail.visibility = View.VISIBLE
+            hideData()
+        } else {
+            binding.progressBarDetail.visibility = View.GONE
+            showData()
+        }
+    }
 
+    private fun hideData() {
+        binding.apply {
+            ivProfile.visibility = View.INVISIBLE
+            toggleFavorite.visibility = View.INVISIBLE
+            tvCompany.visibility = View.INVISIBLE
+            tvFollowers.visibility = View.INVISIBLE
+            tvFollowing.visibility = View.INVISIBLE
+            tvLocation.visibility = View.INVISIBLE
+            tvName.visibility = View.INVISIBLE
+            tvRepository.visibility = View.INVISIBLE
+            tvUsername.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun showData() {
+        binding.apply {
+            ivProfile.visibility = View.VISIBLE
+            toggleFavorite.visibility = View.VISIBLE
+            tvCompany.visibility = View.VISIBLE
+            tvFollowers.visibility = View.VISIBLE
+            tvFollowing.visibility = View.VISIBLE
+            tvLocation.visibility = View.VISIBLE
+            tvName.visibility = View.VISIBLE
+            tvRepository.visibility = View.VISIBLE
+            tvUsername.visibility = View.VISIBLE
+        }
+    }
 }

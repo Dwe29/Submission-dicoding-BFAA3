@@ -1,6 +1,5 @@
 package com.example.dicodingsubmission3.viewmodels
 
-import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FollowersViewModel(application: Application) : ViewModel() {
+class FollowersViewModel : ViewModel() {
     val listFollowers = MutableLiveData<ArrayList<User>>()
 
     fun setListFollowers(username: String) {
@@ -32,7 +31,6 @@ class FollowersViewModel(application: Application) : ViewModel() {
                 override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
                     Log.d("Failure", t.message!!)
                 }
-
             })
     }
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dicodingsubmission3.data.model.DetailUserResponse
 import com.example.dicodingsubmission3.data.model.User
 import com.example.dicodingsubmission3.databinding.ItemUserBinding
 

@@ -41,11 +41,11 @@ class ViewModelFactory constructor(private val application: Application): ViewMo
             }
 
             modelClass.isAssignableFrom(FollowersViewModel::class.java) -> {
-                FollowersViewModel(application) as T
+                FollowersViewModel() as T
             }
 
             modelClass.isAssignableFrom(FollowingViewModel::class.java) -> {
-                FollowingViewModel(application) as T
+                FollowingViewModel() as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

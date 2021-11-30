@@ -20,12 +20,12 @@ class DetailUserViewModel(application: Application) : AndroidViewModel(applicati
     val user = MutableLiveData<DetailUserResponse>()
 
     private var userDao: FavoriteUserDao?
-    private var userDb: UserDatabase?
+    private var userDb: UserDatabase? = UserDatabase.getDatabase(application)
 
     init {
-        userDb = UserDatabase.getDatabase(application)
         userDao = userDb?.favoriteUserDao()
     }
+
     fun setUserDetail(username: String) {
         RetrofitClient.apiInstance
             .getUserDetail(username)
